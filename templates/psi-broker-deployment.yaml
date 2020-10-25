@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: psi-broker
+  labels:
+    upsource: psi-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: psi-broker
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: psi-broker
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: psi-broker
+          args:
+            - --J
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra
+            - name: CASSANDRA_NATIVE_TRANSPORT_PORT
+              value: "9042"
+            - name: UPSOURCE_DATABASE
+              value: datastax
+            - name: UPSOURCE_PSI_BROKER_LISTEN_PORT
+            - name: UPSOURCE_SERVICE_LISTEN_ADDRESS
+              value: 0.0.0.0
+            - name: UPSOURCE_SERVICE_MESSAGING_PORT
+              value: "10061"
+            - name: UPSOURCE_STATISTICS_UPLOAD
+              value: "true"
+            - name: HUB_URL
+              value: "hub"
+            - name: UPSOURCE_SERVICE_ID
+              value: "e697239b-b43c-4826-bb65-7f925deccc36"
+            - name: UPSOURCE_SERVICE_SECRET
+              value: "ut6ZQznZlALY"
+          image: jetbrains/upsource-psi-broker:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: psi-broker-logs
+              mountPath: /opt/upsource-psi-broker/logs
+      restartPolicy: Always
+      volumes:
+        - name: psi-broker-logs
+          emptyDir: { }

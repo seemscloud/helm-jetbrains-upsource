@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-init
+  labels:
+    upsource: cluster-init
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: cluster-init
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: cluster-init
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: cluster-init
+          args:
+            - --J
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra
+            - name: CASSANDRA_NATIVE_TRANSPORT_PORT
+              value: "9042"
+            - name: UPSOURCE_DATABASE
+              value: datastax
+            - name: UPSOURCE_SERVICE_LISTEN_ADDRESS
+              value: 0.0.0.0
+            - name: UPSOURCE_SERVICE_MESSAGING_PORT
+              value: "10061"
+            - name: UPSOURCE_STATISTICS_UPLOAD
+              value: "true"
+            - name: UPSOURCE_SERVICE_ID
+              value: "0-0-0-0-0"
+            - name: UPSOURCE_SERVICE_SECRET
+              value: "TSOoLc50bcto"
+            - name: HUB_URL
+              value: "http://hub:8080/"
+            - name: UPSOURCE_URL
+              value: "http://proxy:8080"
+          image: jetbrains/upsource-cluster-init:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: cluster-init-logs
+              mountPath: /opt/upsource-analyzer/logs
+      restartPolicy: Always
+      volumes:
+        - name: cluster-init-logs
+          emptyDir: { }

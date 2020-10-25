@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-clustering
+  labels:
+    upsource: file-clustering
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: file-clustering
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: file-clustering
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: file-clustering
+          args:
+            - --J
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra
+            - name: CASSANDRA_NATIVE_TRANSPORT_PORT
+              value: "9042"
+            - name: UPSOURCE_DATABASE
+              value: datastax
+            - name: UPSOURCE_SERVICE_LISTEN_ADDRESS
+              value: 0.0.0.0
+            - name: UPSOURCE_SERVICE_MESSAGING_PORT
+              value: "10061"
+            - name: UPSOURCE_STATISTICS_UPLOAD
+              value: "true"
+            - name: UPSOURCE_SERVICE_ID
+              value: "e697239b-b43c-4826-bb65-7f925deccc36"
+            - name: UPSOURCE_SERVICE_SECRET
+              value: "ut6ZQznZlALY"
+          image: jetbrains/upsource-file-clustering:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: file-clustering-logs
+              mountPath: /opt/upsource-file-clustering/logs
+      restartPolicy: Always
+      volumes:
+        - name: file-clustering-logs
+          emptyDir: { }

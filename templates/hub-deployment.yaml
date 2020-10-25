@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub
+  labels:
+    upsource: hub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: hub
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: hub
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: hub
+          image: jetbrains/hub:2020.1.12629
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always

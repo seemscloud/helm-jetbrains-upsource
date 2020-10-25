@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy
+  labels:
+    upsource: proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: proxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: proxy
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: proxy
+          args:
+            - --J
+          env:
+            - name: MONITORING_HOST
+              value: monitoring
+            - name: MONITORING_PORT
+              value: "8181"
+            - name: UPSOURCE_EXPOSED_PROXY_PORT
+              value: "8080"
+            - name: UPSOURCE_MONITORING_LISTEN_PORT
+              value: "8181"
+            - name: constraint
+              value: node==
+          image: jetbrains/upsource-proxy:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: proxy-logs
+              mountPath: /opt/upsource-proxy/logs
+      restartPolicy: Always
+      volumes:
+        - name: proxy-logs
+          emptyDir: { }

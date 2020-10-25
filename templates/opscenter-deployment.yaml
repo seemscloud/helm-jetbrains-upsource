@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opscenter
+  labels:
+    upsource: opscenter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: opscenter
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: opscenter
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: opscenter
+          args:
+            - --J
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra
+            - name: CASSANDRA_NATIVE_TRANSPORT_PORT
+              value: "9042"
+            - name: UPSOURCE_DATABASE
+              value: datastax
+            - name: UPSOURCE_SERVICE_LISTEN_ADDRESS
+              value: 0.0.0.0
+            - name: UPSOURCE_SERVICE_MESSAGING_PORT
+              value: "10061"
+            - name: UPSOURCE_STATISTICS_UPLOAD
+              value: "true"
+            - name: UPSOURCE_WEB_SERVER_LISTEN_PORT
+            - name: constraint
+              value: node==
+          image: jetbrains/upsource-opscenter:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: opscenter-logs
+              mountPath: /opt/upsource-opscenter/logs
+      restartPolicy: Always
+      volumes:
+        - name: opscenter-logs
+          emptyDir: { }

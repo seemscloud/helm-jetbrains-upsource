@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cassandra
+  labels:
+    upsource: cassandra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      upsource: cassandra
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        upsource: cassandra
+        jetbrains.network/upsource: "true"
+    spec:
+      containers:
+        - name: cassandra
+          args:
+            - --J
+          env:
+            - name: constraint
+              value: node==
+          image: jetbrains/upsource-cassandra:2020.1.1815
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: cassandra-logs
+              mountPath: /opt/upsource-cassandra/logs
+      restartPolicy: Always
+      volumes:
+        - name: cassandra-logs
+          emptyDir: { }
