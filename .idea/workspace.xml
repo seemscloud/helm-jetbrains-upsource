@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="02df0d8c-621d-4c6e-86c1-b7b7fadfca13" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="JupyterTrust" id="badbdddd-5222-4b85-97d2-e253c943b742" />
+  <component name="ProjectId" id="1jNYyWrtvEcdVrvcnXEh0KJpymg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02df0d8c-621d-4c6e-86c1-b7b7fadfca13" name="Default Changelist" comment="" />
+      <created>1603646270236</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603646270236</updated>
+      <workItem from="1603646271263" duration="7779000" />
+      <workItem from="1603656256153" duration="10729000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="824" y="337" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603658701813">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="824" y="337" key="#com.intellij.fileTypes.FileTypeChooser/1.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603658701813" />
+    <state x="722" y="148" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603663121744">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="722" y="148" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603663121744" />
+    <state x="811" y="273" width="592" height="522" key="find.popup" timestamp="1603646346504">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="811" y="273" width="592" height="522" key="find.popup/1.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603646346504" />
+  </component>
+</project>
